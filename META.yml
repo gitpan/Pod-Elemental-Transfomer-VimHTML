@@ -1,0 +1,16 @@
+---
+abstract: "convert \"=begin vim\" regions to colorized XHTML with Vim"
+author:
+  - 'Ricardo SIGNES <rjbs@cpan.org>'
+generated_by: 'Dist::Zilla version 1.093400'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Pod-Elemental-Transfomer-VimHTML
+requires:
+  Pod::Elemental::Transformer::SynHi: 0
+  Text::VimColor: 0
+resources:
+  repository: http://github.com/rjbs/pod-elemental-transformer-vimhtml
+version: 0.093580

@@ -1,0 +1,22 @@
+{
+   "resources" : {
+      "repository" : "http://github.com/rjbs/pod-elemental-transformer-vimhtml"
+   },
+   "meta-spec" : {
+      "version" : 1.4,
+      "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
+   },
+   "generated_by" : "Dist::Zilla version 1.093400",
+   "version" : "0.093580",
+   "name" : "Pod-Elemental-Transfomer-VimHTML",
+   "author" : [
+      "Ricardo SIGNES <rjbs@cpan.org>"
+   ],
+   "license" : "perl",
+   "requires" : {
+      "Pod::Elemental::Transformer::SynHi" : "0",
+      "Text::VimColor" : "0"
+   },
+   "abstract" : "convert \"=begin vim\" regions to colorized XHTML with Vim"
+}
+
