@@ -1,10 +1,13 @@
 package Pod::Elemental::Transformer::VimHTML;
-our $VERSION = '0.093580';
+{
+  $Pod::Elemental::Transformer::VimHTML::VERSION = '0.093581';
+}
 use Moose;
 with 'Pod::Elemental::Transformer::SynHi';
 # ABSTRACT: convert "=begin vim" regions to colorized XHTML with Vim
 
 
+use Encode ();
 use Text::VimColor;
 
 has '+format_name' => (default => 'vim');
@@ -12,12 +15,21 @@ has '+format_name' => (default => 'vim');
 sub build_html {
   my ($self, $str, $param) = @_;
 
+  my $octets = Encode::encode('utf-8', $str, Encode::FB_CROAK);
+
   my $vim = Text::VimColor->new(
-    string   => $str,
+    string   => $octets,
     filetype => $param->{filetype},
+
+    vim_options => [
+      qw( -RXZ -i NONE -u NONE -N -n ), "+set nomodeline", '+set fenc=utf-8',
+    ],
   );
 
-  return $vim->html;
+  my $html_bytes = $vim->html;
+  my $html = Encode::decode('utf-8', $html_bytes);
+
+  return $html;
 }
 
 sub parse_synhi_param {
@@ -44,7 +56,7 @@ Pod::Elemental::Transformer::VimHTML - convert "=begin vim" regions to colorized
 
 =head1 VERSION
 
-version 0.093580
+version 0.093581
 
 =head1 DESCRIPTION
 
@@ -74,11 +86,11 @@ transformer to look for a region other than C<vim>.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
